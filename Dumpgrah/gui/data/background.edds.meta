@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{00BB484E5BFFFBB7}BookLayout/gui/data/background.edds"
+ Author "desktop-19meifj"
+ ChangeDate -1558402482
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "background.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{3A36334A1CD466D5}ndgtemplates/gui/data/NEWDAWNexportmedium.edds"
+ Author "desktop-2rdfoul"
+ ChangeDate -400790943
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "NEWDAWNexportmedium.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

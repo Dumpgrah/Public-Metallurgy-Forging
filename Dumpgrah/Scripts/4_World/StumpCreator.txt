@@ -1,0 +1,131 @@
+modded class WoodBase
+{
+
+	void WoodBase()
+	{
+		InitMiningValues();
+	}
+}
+modded class TreeHard_t_populusAlba_3s: TreeHard
+{
+	void TreeHard_t_populusAlba_3s()
+	{
+		InitMiningValues();
+	}
+	
+	override void InitMiningValues()
+	{
+		super.InitMiningValues();
+		m_IsCuttable = true;
+		
+		m_PrimaryDropsAmount = 2;
+		m_SecondaryDropsAmount = 5;
+		m_SecondaryDropsAmount = 1;
+		m_ToolDamage = 6.0;
+		m_CycleTimeOverride = GameConstants.MINING_WOOD_SLOW;
+		m_PrimaryOutput = "WoodenLog";
+		m_SecondaryOutput = "FireWood";
+		m_SecondaryOutput = "ND_TreeStump";
+	}
+};
+modded class TreeHard_t_quercusRobur_2s: TreeHard
+{
+		void TreeHard_t_quercusRobur_2s()
+	{
+		InitMiningValues();
+	}
+	
+	override void InitMiningValues()
+	{
+		super.InitMiningValues();
+		m_IsCuttable = true;
+		
+		m_PrimaryDropsAmount = 1;
+		m_SecondaryDropsAmount = 2;
+		m_SecondaryDropsAmount = 1;
+		m_ToolDamage = 2.0;
+		m_CycleTimeOverride = GameConstants.MINING_WOOD_SLOW;
+		m_PrimaryOutput = "WoodenLog";
+		m_SecondaryOutput = "FireWood";
+		m_SecondaryOutput = "ND_TreeStump";
+	}
+};
+modded class TreeHard_t_PinusSylvestris_3s: TreeHard
+{
+		void TreeHard_t_PinusSylvestris_3s()
+	{
+		InitMiningValues();
+	}
+	
+	override void InitMiningValues()
+	{
+		super.InitMiningValues();
+		m_IsCuttable = true;
+		
+		m_PrimaryDropsAmount = 3;
+		m_SecondaryDropsAmount = 2;
+		m_SecondaryDropsAmount = 1;
+		m_ToolDamage = 2.0;
+		m_CycleTimeOverride = GameConstants.MINING_WOOD_SLOW;
+		m_PrimaryOutput = "WoodenLog";
+		m_SecondaryOutput = "FireWood";
+		m_SecondaryOutput = "ND_TreeStump";
+	}
+};
+modded class TreeHard_t_quercusRobur_2sb: TreeHard
+{
+	override void InitMiningValues()
+	{
+		super.InitMiningValues();
+		m_IsCuttable = true;
+		
+		m_PrimaryDropsAmount = 1;
+		m_SecondaryDropsAmount = 2;
+		m_SecondaryDropsAmount = 1;
+		m_ToolDamage = 2.0;
+		m_CycleTimeOverride = GameConstants.MINING_WOOD_SLOW;
+		m_PrimaryOutput = "WoodenLog";
+		m_SecondaryOutput = "FireWood";
+		m_SecondaryOutput = "ND_TreeStump";
+	}
+};
+modded class TreeHard_t_FagusSylvatica_2s: TreeHard
+{
+	override void InitMiningValues()
+	{
+		super.InitMiningValues();
+		m_IsCuttable = true;
+		
+		m_PrimaryDropsAmount = 2;
+		m_SecondaryDropsAmount = 2;
+		m_SecondaryDropsAmount = 1;
+		m_ToolDamage = 3.0;
+		m_CycleTimeOverride = GameConstants.MINING_WOOD_SLOW;
+		m_PrimaryOutput = "WoodenLog";
+		m_SecondaryOutput = "FireWood";
+		m_SecondaryOutput = "ND_TreeStump";
+	}
+};
+modded class TreeHard_t_naked_2s: TreeHard
+{
+		void TreeHard_t_naked_2s()
+	{
+		InitMiningValues();
+	}
+	
+	
+	override void InitMiningValues()
+	{
+		super.InitMiningValues();
+		m_IsCuttable = true;
+		
+		m_PrimaryDropsAmount = 3;
+		m_SecondaryDropsAmount = 4;
+		m_SecondaryDropsAmount = 1;
+		m_ToolDamage = 2.0;
+		m_CycleTimeOverride = GameConstants.MINING_WOOD_SLOW;
+		m_PrimaryOutput = "WoodenLog";
+		m_SecondaryOutput = "FireWood";
+		m_SecondaryOutput = "ND_TreeStump";
+	}
+};

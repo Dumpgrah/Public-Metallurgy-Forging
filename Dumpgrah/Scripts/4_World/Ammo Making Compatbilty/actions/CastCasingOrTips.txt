@@ -1,0 +1,222 @@
+#ifdef AM_MOD_221
+modded class AM_ActionCastMetalCB : ActionContinuousBaseCB
+{
+	override void CreateActionComponent()
+	{
+		m_ActionData.m_ActionComponent = new CAContinuousTime( 10 ); // Dont forget to change back to 30
+	}
+};
+modded class AM_ActionCastingCasingAmmo: ActionContinuousBase
+{
+	string TendancyText = "";
+		
+	int RQuantityRequired = 0;
+	int PQuantityRequired = 0;
+
+	int RQuantityRequired1 = 0;
+	int PQuantityRequired1 = 0;			
+	
+    void AM_ActionCastingCasingAmmo()
+	{
+		m_CallbackClass = AM_ActionCastMetalCB;
+		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_EMPTY_VESSEL;
+		m_CommandUIDProne = DayZPlayerConstants.CMD_ACTIONFB_EMPTY_VESSEL;
+		m_SpecialtyWeight = UASoftSkillsWeight.PRECISE_LOW;
+    };
+
+    override void CreateConditionComponents()
+	{
+        m_ConditionItem = new CCINone;
+        m_ConditionTarget = new CCTCursor;
+    };
+
+    override string GetText()
+	{
+        return "Cast " + TendancyText;
+    };
+
+	override bool ActionCondition( PlayerBase player, ActionTarget target, ItemBase item )
+	{
+		CrucibleMoltenBrass Crucible = item;
+		
+		RQuantityRequired = Crucible.GetRifleCasingReqQuantity();
+		PQuantityRequired = Crucible.GetPistolCasingReqQuantity();
+		
+        EntityAI target_entity = EntityAI.Cast( target.GetObject() );
+        Object target_object = target.GetObject();
+		StrongRifleCasingMold RifleMold = StrongRifleCasingMold.Cast( target_object );
+		StrongPistolCasingMold PistolMold = StrongPistolCasingMold.Cast( target_object );
+		
+		ND_ClayRifleCasingMold RifleClayMold = ND_ClayRifleCasingMold.Cast( target_object );
+		ND_ClayPistolCasingMold PistolClayMold = ND_ClayPistolCasingMold.Cast( target_object );
+ 
+		if (Crucible && Crucible.GetQuantity() >= RQuantityRequired && Crucible.HotEnough())
+		{
+			if(RifleMold || RifleClayMold)
+			{
+				TendancyText = Crucible.GetRifleTendancyText();
+				return true;
+			}
+			else if(PistolMold || PistolClayMold)
+			{
+				TendancyText = Crucible.GetPistolTendancyText();
+				return true;
+			}
+            return false;
+        }
+		return false;
+    };
+    
+	override void OnFinishProgressServer( ActionData action_data )
+    {
+		CrucibleMoltenBrass Crucible = CrucibleMoltenBrass.Cast(action_data.m_MainItem);
+		ND_ClayCrucibleMoltenBrass ClayCrucible = ND_ClayCrucibleMoltenBrass.Cast(action_data.m_MainItem);
+		 
+		StrongRifleCasingMold RifleMold = StrongRifleCasingMold.Cast( action_data.m_Target.GetObject() );
+		StrongPistolCasingMold PistolMold = StrongPistolCasingMold.Cast( action_data.m_Target.GetObject() );
+		
+		ND_ClayRifleCasingMold RifleClayMold = ND_ClayRifleCasingMold.Cast(  action_data.m_Target.GetObject()  );
+		ND_ClayPistolCasingMold PistolClayMold = ND_ClayPistolCasingMold.Cast(  action_data.m_Target.GetObject()  );
+		
+		PlayerBase target = PlayerBase.Cast(action_data.m_Player);
+	
+		if(ClayCrucible || Crucible)
+		{
+			if(RifleClayMold)
+			{
+				RifleClayMold.CreateCasing(ClayCrucible.GetRifleCasingTendancyCreationType() );
+				ClayCrucible.MinusQuantityRifle();
+			}
+			else if (RifleMold)
+			{
+				RifleMold.CreateCasing(Crucible.GetRifleCasingTendancyCreationType() );
+				Crucible.MinusQuantityRifle();
+			}
+			else if(PistolClayMold)
+			{
+				PistolClayMold.CreateCasing(ClayCrucible.GetPistolCasingTendancyCreationType() );
+				ClayCrucible.MinusQuantityPistol();
+			}
+			else
+			{
+				PistolMold.CreateCasing(Crucible.GetPistolCasingTendancyCreationType() );
+				Crucible.MinusQuantityPistol();
+			}
+		};
+	};
+};
+
+modded class AM_ActionCastingTipsAmmo: ActionContinuousBase
+{
+	    string TendancyText = "";
+		int RQuantityRequired = 0;
+		int PQuantityRequired = 0;
+		
+		int RQuantityRequired1 = 0;
+		int PQuantityRequired1 = 0;	
+	
+    void AM_ActionCastingTipsAmmo()
+	{
+		m_CallbackClass = AM_ActionCastMetalCB;
+		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_EMPTY_VESSEL;
+		m_CommandUIDProne = DayZPlayerConstants.CMD_ACTIONFB_EMPTY_VESSEL;
+		m_SpecialtyWeight = UASoftSkillsWeight.PRECISE_LOW;
+    };
+
+    override void CreateConditionComponents()
+	{
+        m_ConditionItem = new CCINone;
+        m_ConditionTarget = new CCTCursor;
+    };
+
+    override string GetText()
+	{
+        return "" + TendancyText;
+    };
+
+    override bool ActionCondition( PlayerBase player, ActionTarget target, ItemBase item )
+	{
+		CrucibleMoltenLead Crucible = item;
+		ND_ClayCrucibleMoltenLead ClayCrucible = item;
+		
+		RQuantityRequired = Crucible.GetRifleTipsReqQuantity();
+		PQuantityRequired = Crucible.GetPistolTipsReqQuantity();
+		
+		RQuantityRequired1 = ClayCrucible.GetRifleTipsReqQuantity();
+		PQuantityRequired1 = ClayCrucible.GetPistolTipsReqQuantity();
+		
+        EntityAI target_entity = EntityAI.Cast( target.GetObject() );
+        Object target_object = target.GetObject();
+		StrongRifleTipsMold RifleTipsMold = StrongRifleTipsMold.Cast( target_object );
+		StrongPistolTipsMold PistolTipsMold = StrongPistolTipsMold.Cast( target_object );
+		
+		ND_ClayRifleTipsMold RifleTipsClayMold = ND_ClayRifleTipsMold.Cast( target_object );
+		ND_ClayPistolTipsMold PistolTipsClayMold = ND_ClayPistolTipsMold.Cast( target_object );
+        
+        if (RifleTipsMold  && Crucible && Crucible.GetQuantity() >= RQuantityRequired && Crucible.HotEnough())
+		{
+			TendancyText = Crucible.GetRifleTendancyText();
+            return true;
+        }
+		else if (PistolTipsMold && Crucible && Crucible.GetQuantity() >= PQuantityRequired && Crucible.HotEnough())
+		{
+			TendancyText = Crucible.GetPistolTendancyText();
+            return true;
+        };
+		
+		
+		if (RifleTipsClayMold  && ClayCrucible && ClayCrucible.GetQuantity() >= RQuantityRequired1 && ClayCrucible.HotEnough())
+		{
+			TendancyText = ClayCrucible.GetRifleTendancyText();
+            return true;
+        }
+		else if (PistolTipsClayMold && ClayCrucible && ClayCrucible.GetQuantity() >= PQuantityRequired1 && ClayCrucible.HotEnough())
+		{
+			TendancyText = ClayCrucible.GetPistolTendancyText();
+            return true;
+        };
+		
+		TendancyText = "";
+        return false;
+    };
+    
+	override void OnFinishProgressServer( ActionData action_data )
+    {
+		CrucibleMoltenLead Crucible = CrucibleMoltenLead.Cast(action_data.m_MainItem);
+		ND_ClayCrucibleMoltenLead ClayCrucible = ND_ClayCrucibleMoltenLead.Cast(action_data.m_MainItem);
+		
+		StrongRifleTipsMold RifleTipsMold = StrongRifleTipsMold.Cast( action_data.m_Target.GetObject() );
+		StrongPistolTipsMold PistolTipsMold = StrongPistolTipsMold.Cast( action_data.m_Target.GetObject() );
+		
+		ND_ClayRifleTipsMold RifleTipsClayMold = ND_ClayRifleTipsMold.Cast( action_data.m_Target.GetObject() );
+		ND_ClayPistolTipsMold PistolTipsClayMold = ND_ClayPistolTipsMold.Cast( action_data.m_Target.GetObject() );
+		
+		PlayerBase target = PlayerBase.Cast(action_data.m_Player);
+		
+        if(RifleTipsMold && Crucible)
+		{
+            RifleTipsMold.CreateTips(Crucible.GetRifleTipsTendancyCreationType() );
+			Crucible.MinusQuantityRifle();
+			
+        }
+		else if(PistolTipsMold && Crucible)
+		{
+            PistolTipsMold.CreateTips(Crucible.GetPistolTipsTendancyCreationType() );
+			Crucible.MinusQuantityPistol();
+        };
+		
+		if(RifleTipsClayMold && ClayCrucible )
+		{
+			RifleTipsClayMold.CreateTips(ClayCrucible.GetRifleTipsTendancyCreationType() );
+			ClayCrucible.MinusQuantityRifle();
+			
+        }
+		else if(PistolTipsClayMold && ClayCrucible)
+		{
+			PistolTipsClayMold.CreateTips(ClayCrucible.GetPistolTipsTendancyCreationType() );
+			ClayCrucible.MinusQuantityPistol();
+        };
+		
+    };
+};
+#endif

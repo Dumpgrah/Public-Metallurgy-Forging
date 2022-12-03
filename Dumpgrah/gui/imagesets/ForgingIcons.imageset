@@ -1,0 +1,56 @@
+ImageSetClass {
+ Name "ForgingIcons"
+ RefSize 2048 2048
+ Textures {
+  ImageSetTextureClass {
+   mpix 1
+   path "{BA006305DC7FAEAB}Dumpgrah/gui/imagesets/Custom Attachment Icons.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass OreCrucible {
+   Name "OreCrucible"
+   Pos 14 8
+   Size 240 208
+   Flags 0
+  }
+  ImageSetDefClass EmptyCrucible {
+   Name "EmptyCrucible"
+   Pos 282 10
+   Size 229 219
+   Flags 0
+  }
+  ImageSetDefClass Ingot {
+   Name "Ingot"
+   Pos 522 4
+   Size 267 305
+   Flags 0
+  }
+  ImageSetDefClass CoalFuel {
+   Name "CoalFuel"
+   Pos 815 0
+   Size 233 328
+   Flags 0
+  }
+  ImageSetDefClass Wedges {
+   Name "Wedges"
+   Pos 1125 91
+   Size 220 220
+   Flags 0
+  }
+  ImageSetDefClass Stump {
+   Name "Stump"
+   Pos 1439 87
+   Size 223 249
+   Flags 0
+  }
+  ImageSetDefClass Metal {
+   Name "Metal"
+   Pos 25 344
+   Size 375 357
+   Flags 0
+  }
+ }
+ Groups {
+ }
+}

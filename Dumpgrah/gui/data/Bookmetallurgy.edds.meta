@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{457D258AE282EBA7}Dumpgrah/gui/data/Bookmetallurgy.edds"
+ Author "desktop-2rdfoul"
+ ChangeDate -599037255
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "Bookmetallurgy.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}

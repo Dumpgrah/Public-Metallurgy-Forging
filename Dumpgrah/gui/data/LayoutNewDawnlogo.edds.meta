@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{23C73B74434F67F5}ndgtemplates/gui/data/LayoutNewDawnlogo.edds"
+ Author "desktop-2rdfoul"
+ ChangeDate -186357151
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "LayoutNewDawnlogo.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

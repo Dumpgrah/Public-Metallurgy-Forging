@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{E170C0C3A2873286}Dumpgrah/gui/data/metallurgy.edds"
+ Author "desktop-2rdfoul"
+ ChangeDate 641575526
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "metallurgy.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

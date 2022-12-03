@@ -1,0 +1,47 @@
+modded class FireplaceBase
+{
+	typename ATTACHMENT_SplitWood		= ND_SplitWood;
+	typename ATTACHMENT_Charcoal		= ND_Charcoal;
+	
+	protected void FireplaceBase()
+	{
+		if ( !m_FireConsumableTypes )
+		{
+			m_FireConsumableTypes = new ref map<typename, ref FireConsumableType>;
+			m_FireConsumableTypes.Insert( ATTACHMENT_RAGS, 			new FireConsumableType( ATTACHMENT_RAGS, 		14, 	true,	"Rags" ) );
+			m_FireConsumableTypes.Insert( ATTACHMENT_BANDAGE, 		new FireConsumableType( ATTACHMENT_BANDAGE, 	14, 	true,	"MedicalBandage" ) );
+			m_FireConsumableTypes.Insert( ATTACHMENT_BOOK, 			new FireConsumableType( ATTACHMENT_BOOK, 		36, 	true,	"Book" ) );
+			m_FireConsumableTypes.Insert( ATTACHMENT_BARK_OAK, 		new FireConsumableType( ATTACHMENT_BARK_OAK, 	20, 	true,	"OakBark" ) );
+			m_FireConsumableTypes.Insert( ATTACHMENT_BARK_BIRCH, 	new FireConsumableType( ATTACHMENT_BARK_BIRCH, 	14, 	true,	"BirchBark" ) );
+			m_FireConsumableTypes.Insert( ATTACHMENT_PAPER, 		new FireConsumableType( ATTACHMENT_PAPER, 		10, 	true,	"Paper" ) );
+			
+			//define fuel types
+			m_FireConsumableTypes.Insert( ATTACHMENT_STICKS, 		new FireConsumableType( ATTACHMENT_STICKS, 		40, 	false,	"WoodenStick" ) );
+			m_FireConsumableTypes.Insert( ATTACHMENT_FIREWOOD, 		new FireConsumableType( ATTACHMENT_FIREWOOD, 	100, 	false,	"Firewood" ) );
+			
+			m_FireConsumableTypes.Insert( ATTACHMENT_SplitWood,    new FireConsumableType( ATTACHMENT_SplitWood,     50,     false,    "ND_SplitWood" ) );
+			m_FireConsumableTypes.Insert( ATTACHMENT_Charcoal,     new FireConsumableType( ATTACHMENT_Charcoal,     150,     false,    "ND_Charcoal" ) );
+			
+		}
+		//calculate total energy
+		CalcAndSetTotalEnergy();
+		
+		//define fuel / kindling items (fire consumables)
+		m_FireConsumables = new ref map<ItemBase, ref FireConsumable>;
+		
+		//default burning parameters
+		SetTemperatureLossMP( TEMPERATURE_LOSS_MP_DEFAULT );
+		SetFuelBurnRateMP( FUEL_BURN_RATE_DEFAULT );
+		
+		//synchronized variables
+		RegisterNetSyncVariableBool( "m_IsBurning" );
+		RegisterNetSyncVariableBool( "m_HasAshes" );
+		RegisterNetSyncVariableBool( "m_IsOven" );
+		RegisterNetSyncVariableBool( "m_HasStoneCircle" );
+		RegisterNetSyncVariableBool( "m_RoofAbove" );
+		RegisterNetSyncVariableInt( "m_FireState", FireplaceFireState.NO_FIRE, FireplaceFireState.COUNT );
+		RegisterNetSyncVariableBool( "m_IsSoundSynchRemote" );
+		RegisterNetSyncVariableBool( "m_IsPlaceSound" );
+	}
+
+};

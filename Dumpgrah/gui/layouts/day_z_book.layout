@@ -1,0 +1,263 @@
+FrameWidgetClass ContainerWidget {
+ clipchildren 0
+ color 0.7843 0.7843 0.7843 1
+ position 0.00089 -0.00153
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ priority 50
+ {
+  WindowWidgetClass Old {
+   visible 0
+   color 1 0.7843 1 1
+   position 0.00178 -0.01072
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_black
+   {
+    PanelWidgetClass BackPanelWidget {
+     visible 1
+     color 0.4706 0.4706 0.4706 0.4706
+     position 0 0
+     size 0.475 0.9
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style rover_sim_black
+     {
+      PanelWidgetClass PanelWidget0 {
+       color 1 0.9882 0.7725 0.7843
+       position 0 0.022
+       size 0.868 0.911
+       halign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style rover_sim_colorable
+      }
+     }
+    }
+   }
+  }
+  ImageWidgetClass Background {
+   visible 1
+   ignorepointer 1
+   position 0 0
+   size 0.4 0.9
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   imageTexture "{AD0B8BB75FC553FA}Dumpgrah/gui/data/background.edds"
+   mode blend
+   "src alpha" 1
+   stretch 1
+   {
+    HtmlWidgetClass HtmlWidget {
+     clipchildren 0
+     color 0.2235 0.2235 0.2235 1
+     position 0.01665 0.02
+     size 0.79991 0.85
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     scaled 1
+     font "ndgtemplates\data\Fonts\InkFree\InkFree"
+     "exact text" 1
+     "size to text h" 0
+     "size to text v" 0
+     wrap 1
+    }
+   }
+  }
+  TextWidgetClass Page {
+   color 0.2235 0.2235 0.2235 1
+   position 0 0.012
+   size 0.159 0.035
+   halign center_ref
+   valign bottom_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   text "- 0 -"
+   "exact text" 1
+   "text halign" center
+  }
+  ButtonWidgetClass PrevButton {
+   visible 1
+   position 0.15 0.05
+   size 0.075 0.04
+   valign bottom_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   userID 102
+   style Default
+   text "Previous"
+  }
+  ButtonWidgetClass NextButton {
+   visible 1
+   position 0.15 0.05
+   size 0.075 0.04
+   halign right_ref
+   valign bottom_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   userID 103
+   style Default
+   text "#layout_day_z_book_next"
+  }
+  GridSpacerWidgetClass GridSpacerWidget0 {
+   ignorepointer 1
+   position 0.15 0.1
+   size 250 100
+   halign right_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 1
+   vexactsize 1
+   Padding 0
+   Margin 10
+   Columns 1
+   Rows 2
+   {
+    TextWidgetClass Author {
+     position 0.507 0.012
+     size 0.478 0.035
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     text "Author"
+     "exact text" 1
+     "text valign" center
+    }
+    TextWidgetClass Title {
+     clipchildren 0
+     position 0.014 0.012
+     size 0.478 0.035
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     text "Title"
+     "exact text" 1
+     "text valign" center
+    }
+   }
+  }
+  ButtonWidgetClass BackBtn1 {
+   visible 1
+   position 0.18109 0.48492
+   size 0.10929 0.05072
+   halign right_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   fixaspect fixwidth
+   userID 2
+   style Default
+   text_offset 1 1
+   text_halign center
+   "text color" 1 1 1 1
+   "disabled text color" 0.3373 0.3373 0.3373 1
+   {
+    ImageWidgetClass IconClose {
+     visible 0
+     ignorepointer 1
+     position 0 0
+     size 2.60796 1
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     fixaspect fixwidth
+     image0 "set:dayz_gui image:Close"
+     mode blend
+     "src alpha" 1
+     "no wrap" 1
+     filter 1
+     nocache 0
+    }
+    TextWidgetClass TextWidget0 {
+     ignorepointer 1
+     position 0.00736 0
+     size 0.98528 1
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     text "Close"
+     "text halign" center
+     "text valign" center
+    }
+   }
+  }
+  ButtonWidgetClass YouTubeButton {
+   color 1 1 1 0
+   position 7.60717 127.063
+   size 544.172 448.24603
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+  ImageWidgetClass "Youtube Link" {
+   disabled 1
+   inheritalpha 0
+   ignorepointer 1
+   position 16.1186 140.44398
+   size 525.97601 418.474
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   imageTexture "{457D258AE282EBA7}Dumpgrah/gui/data/Bookmetallurgy.edds"
+   mode blend
+   "src alpha" 1
+   "no wrap" 0
+   stretch 1
+   "Transition width" 0.02
+  }
+  TextWidgetClass TextWidget1 {
+   ignorepointer 1
+   color 0 0 0 1
+   position 39.9566 419.19
+   size 484.63101 86.0398
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "Tutorial"
+   font "gui/fonts/Metron-Bold58"
+   "text color" 0 0 0 1
+   "text halign" center
+  }
+ }
+}

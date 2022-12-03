@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{3A71FCEF371CFF73}Fonts/InkFree22.edds"
+ Author "desktop-2rdfoul"
+ ChangeDate -1164760494
+ Configurations {
+  TGAResourceClass PC {
+   SourceFile "InkFree22.tga"
+  }
+  TGAResourceClass XBOX_ONE : PC {
+  }
+  TGAResourceClass PS4 : PC {
+  }
+  TGAResourceClass LINUX : PC {
+  }
+ }
+}

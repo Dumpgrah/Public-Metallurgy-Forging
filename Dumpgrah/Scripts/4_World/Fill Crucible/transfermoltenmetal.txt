@@ -1,0 +1,1794 @@
+class PourMoltenMetal extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Fill Crucible with Molten Iron";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = -1;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_CrucibleBase");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_CrucibleBase");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return Liquid.CanTransfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			return Liquid.CanTransfer(ingredient2,ingredient1);
+		}
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class PourMoltenCopper extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Fill Crucible with Molten Copper";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = -1;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_CrucibleMoltenCopper");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_CrucibleMoltenCopper");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("ND_EmptyCrucible");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return Liquid.CanTransfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			return Liquid.CanTransfer(ingredient2,ingredient1);
+		}
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class PourMoltenPigIron extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Fill Crucible with Molten Pig Iron";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = -1;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_CrucibleMoltenPigIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_CrucibleMoltenPigIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("ND_EmptyCrucible");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return Liquid.CanTransfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			return Liquid.CanTransfer(ingredient2,ingredient1);
+		}
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+///////Clay only Transfer///////////////////
+class ClayPourMoltenIron extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Fill Crucible with Molten Iron";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = -1;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return Liquid.CanTransfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			return Liquid.CanTransfer(ingredient2,ingredient1);
+		}
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class ClayPourMoltenCopper extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Fill Crucible with Molten Copper";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = -1;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenCopper");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenCopper");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return Liquid.CanTransfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			return Liquid.CanTransfer(ingredient2,ingredient1);
+		}
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class ClayPourMoltenBrass extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Fill Crucible with Molten Brass";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = -1;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenBrass");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenBrass");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return Liquid.CanTransfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			return Liquid.CanTransfer(ingredient2,ingredient1);
+		}
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class ClayPourMoltenPigIron extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Fill Crucible with Molten Pig Iron";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = -1;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenPigIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenPigIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return Liquid.CanTransfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			return Liquid.CanTransfer(ingredient2,ingredient1);
+		}
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class ClayPourMoltenLead extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Fill Crucible with Molten Lead";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = -1;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenLead");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenLead");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return Liquid.CanTransfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			return Liquid.CanTransfer(ingredient2,ingredient1);
+		}
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+///// clay to metal crucible//////////
+class ClayMetalPourMoltenIron extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Clay Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 49;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 99;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_CrucibleMoltenIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ND_ClayCrucibleMoltenIron ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ND_CrucibleMoltenIron ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ND_ClayCrucibleMoltenIron source = NULL;
+		ND_CrucibleMoltenIron target = NULL;
+		
+		ND_ClayCrucibleMoltenIron entity_in_hands = ND_ClayCrucibleMoltenIron.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ND_ClayCrucibleMoltenIron ingredient1 = ingredients[0];
+		ND_CrucibleMoltenIron ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class ClayMetalPourMoltenCopper extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Clay Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 99;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenCopper");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_CrucibleMoltenCopper");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ND_ClayCrucibleMoltenCopper entity_in_hands = ND_ClayCrucibleMoltenCopper.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class ClayMetalPourMoltenBrass extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Clay Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 99;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenBrass");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_CrucibleMoltenBrass");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ND_ClayCrucibleMoltenBrass entity_in_hands = ND_ClayCrucibleMoltenBrass.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class ClayMetalPourMoltenPigIron extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Clay Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 99;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenPigIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_CrucibleMoltenPigIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ND_ClayCrucibleMoltenPigIron entity_in_hands = ND_ClayCrucibleMoltenPigIron.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class ClayMetalPourMoltenLead extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Clay Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 99;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_ClayCrucibleMoltenLead");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_CrucibleMoltenLead");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ND_ClayCrucibleMoltenLead entity_in_hands = ND_ClayCrucibleMoltenLead.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+////////////////Metal to clay crucible//////////
+class MetalClayPourMoltenIron extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Metal Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 49;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_CrucibleMoltenIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("ND_EmptyCrucible");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ND_CrucibleMoltenIron entity_in_hands = ND_CrucibleMoltenIron.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class MetalClayPourMoltenCopper extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Metal Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 49;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_CrucibleMoltenCopper");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenCopper");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("ND_EmptyCrucible");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ND_CrucibleMoltenCopper entity_in_hands = ND_CrucibleMoltenCopper.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class MetalClayPourMoltenBrass extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Metal Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 49;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_CrucibleMoltenBrass");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenBrass");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("ND_EmptyCrucible");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return Liquid.CanTransfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			return Liquid.CanTransfer(ingredient2,ingredient1);
+		}
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class MetalClayPourMoltenPigIron extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Metal Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 49;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_CrucibleMoltenPigIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenPigIron");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("ND_EmptyCrucible");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ND_CrucibleMoltenPigIron entity_in_hands = ND_CrucibleMoltenPigIron.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};
+class MetalClayPourMoltenLead extends RecipeBase
+{	
+	override void Init()
+	{
+		m_Name = "Empty Metal Crucible";
+		m_IsInstaRecipe = false;//should this recipe be performed instantly without animation
+		m_AnimationLength = 1.5;//animation length in relative time units
+		m_Specialty = -0.01;// value > 0 for roughness, value < 0 for precision
+		
+		
+		//conditions
+		m_MinDamageIngredient[0] = -1;//-1 = disable check
+		m_MaxDamageIngredient[0] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[0] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[0] = 80;//-1 = disable check
+		
+		m_MinDamageIngredient[1] = -1;//-1 = disable check
+		m_MaxDamageIngredient[1] = 3;//-1 = disable check
+		
+		m_MinQuantityIngredient[1] = 1;//-1 = disable check
+		m_MaxQuantityIngredient[1] = 49;//-1 = disable check
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//INGREDIENTS
+		//ingredient 1
+		InsertIngredient(0,"ND_CrucibleMoltenLead");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[0] = 0;// 0 = do nothing
+		m_IngredientSetHealth[0] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[0] = -80;// 0 = do nothing
+		m_IngredientDestroy[0] = false;//true = destroy, false = do nothing
+		m_IngredientUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		
+		//ingredient 2
+		InsertIngredient(1,"ND_ClayCrucibleMoltenLead");//you can insert multiple ingredients this way
+
+		
+		m_IngredientAddHealth[1] = 0;// 0 = do nothing
+		m_IngredientSetHealth[1] = -1; // -1 = do nothing
+		m_IngredientAddQuantity[1] = 0;// 0 = do nothing
+		m_IngredientDestroy[1] = false;// false = do nothing
+		m_IngredientUseSoftSkills[1] = false;// set 'true' to allow modification of the values by softskills on this ingredient
+		//----------------------------------------------------------------------------------------------------------------------
+		
+		//result1
+		AddResult("ND_EmptyCrucible");//add results here
+
+		m_ResultSetFullQuantity[0] = false;//true = set full quantity, false = do nothing
+		m_ResultSetQuantity[0] = -1;//-1 = do nothing
+		m_ResultSetHealth[0] = -1;//-1 = do nothing
+		m_ResultInheritsHealth[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result will inherit health from ingredient number (value);(value) == -2 means this result will inherit health from all ingredients averaged(result_health = combined_health_of_ingredients / number_of_ingredients)
+		m_ResultInheritsColor[0] = -1;// (value) == -1 means do nothing; a (value) >= 0 means this result classname will be a composite of the name provided in AddResult method and config value "color" of ingredient (value)
+		m_ResultToInventory[0] = -2;//(value) == -2 spawn result on the ground;(value) == -1 place anywhere in the players inventory, (value) >= 0 means switch position with ingredient number(value)
+		m_ResultUseSoftSkills[0] = false;// set 'true' to allow modification of the values by softskills on this result
+		m_ResultReplacesIngredient[0] = -1;// value == -1 means do nothing; a value >= 0 means this result will transfer item propertiesvariables, attachments etc.. from an ingredient value
+	}
+
+	override bool CanDo(ItemBase ingredients[], PlayerBase player)//final check for recipe's validity
+	{
+		ItemBase ingredient1;
+		Class.CastTo(ingredient1, ingredients[0]);
+		ItemBase ingredient2;
+		Class.CastTo(ingredient2, ingredients[1]);
+
+		ItemBase source = NULL;
+		ItemBase target = NULL;
+		
+		ND_ClayCrucibleMoltenLead entity_in_hands = ND_ClayCrucibleMoltenLead.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		//condition always true for any bottle, another recipe needed for pouring TO handheld bottle
+		if( entity_in_hands == ingredient1 )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	override void Do(ItemBase ingredients[], PlayerBase player,array<ItemBase> results, float specialty_weight)//gets called upon recipe's completion
+	{
+		ItemBase ingredient1 = ingredients[0];
+		ItemBase ingredient2 = ingredients[1];
+		
+		
+		ItemBase entity_in_hands = ItemBase.Cast(player.GetHumanInventory().GetEntityInHands());
+		
+		if( entity_in_hands == ingredient1 )
+		{
+			Liquid.Transfer(ingredient1,ingredient2);
+		}
+		else
+		{
+			Liquid.Transfer(ingredient2,ingredient1);
+		}
+
+	}
+};

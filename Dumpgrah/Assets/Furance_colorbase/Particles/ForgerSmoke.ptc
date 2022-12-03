@@ -1,0 +1,44 @@
+EffectDef {
+ MinFPS 1
+ Emitors {
+  EmitorDef Smoke {
+   Material "{735D641EB0FC5209}system/wbdata/particleeditor/defaultmaterial.emat"
+   SizeMultiplier 8
+   LifeTime 4
+   Color {
+    0 0 0 0 0.4747 0.1772 0.1709 0.1772 1 1 1 1
+   }
+   Alpha {
+    0 1 1 0.25316
+   }
+   RotationSpeed {
+    0 0 1 0.07595
+   }
+   Size {
+    0 0 0.74963 0.63924 1 1
+   }
+   EffectTime 0
+   ColorMast {
+    0 0.0696 0.057 0.0759 0.2786 0.1392 0.1392 0.1392 1 1 1 1
+   }
+   AlphaMast {
+    0 1 1 0.44937
+   }
+   RotationSpeedMast {
+    0 1 1 1
+   }
+   SizeMast {
+    0 0.10759 1 1
+   }
+   BRateMast {
+    0 0 0.80386 0.08861 1 0.72152
+   }
+   AirResistanceMast {
+    0 0.27215 1 0.25316
+   }
+   VelocityMast {
+    0 0.13291 1 0.50633
+   }
+  }
+ }
+}

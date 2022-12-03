@@ -1,0 +1,105 @@
+EffectDef {
+ Emitors {
+  EmitorDef fire_middle {
+   ShapeType Cone
+   ShapeSize 0.1 0 0.1
+   ConeAngle 360 0 60
+   MaxNum 4
+   BirthRate 0.35
+   Offset 0 0.00591 0
+   Material "{3E6CE4D61F8AC71F}graphics/particles/materials/fire/fire_medium_camp_02.emat"
+   CenterY -1
+   SizeMultiplier 0.4
+   SizeRND 0.2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   RandomAngle 0
+   Velocity 0
+   VelocityRND 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 6
+   LifeTimeRND 1
+   Color {
+    0 0 0 1 0.8031 0.3987 0.3987 0.3987 1 0.8671 0.2342 0.2152
+   }
+   Alpha {
+    0 0 0.2 1 0.44882 1 0.8 1 1 0
+   }
+   Size {
+    0 0.35 1 1
+   }
+   EffectTime 1
+   Repeat 1
+  }
+  EmitorDef fire_middle_short {
+   ShapeType Box
+   ShapeSize 0.2 0 0.2
+   MaxNum 20
+   BirthRate 20
+   BirthRateRND 20
+   BirthRateVel 0
+   Offset 0 -0.2 0
+   Material "{853257EDA4B1E35D}graphics/particles/materials/fire/fire_flame_01.emat"
+   SizeMultiplier 0.5
+   SizeRND 0.2
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   VelAngle 1
+   RandomAngle 0
+   Velocity 1
+   VelocityRND 1
+   GravityMultiply 0
+   Restitution 0
+   Spring 0.0015
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.3
+   LifeTimeRND 0.1
+   Color {
+    0 0.0253 0 1 1 0 0.0745 1
+   }
+   Alpha {
+    0 0 0.25074 0.6962 0.63095 0.78481 1 0
+   }
+   Size {
+    0 0 0.49312 0.46541 1 0.18868
+   }
+  }
+  EmitorDef sparks_small {
+   ShapeType Box
+   ShapeSize 0.8 0 0.8
+   ConeAngle 360 0 30
+   MaxNum 10
+   BirthRate 0
+   BirthRateRND 0
+   Material "{009C2EBAACD2D72A}graphics/particles/materials/fire/sparks1.emat"
+   SizeMultiplier 0.03
+   SizeRND 0.02
+   StretchMultiplier 1
+   Velocity 1
+   VelocityRND 2
+   AirResistance 0
+   AirResistanceRND 0.1
+   GravityMultiply 0
+   Spring 0.001
+   Wind 1
+   LifeTime 1.5
+   LifeTimeRND 0.5
+   Color {
+    0 0.9922 1 0.4471 1 1 0.4392 0.2157
+   }
+   Alpha {
+    0 1 0.49705 0.30818 1 0
+   }
+  }
+ }
+}
