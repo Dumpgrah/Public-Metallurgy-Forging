@@ -1,4 +1,6 @@
 # Public-Metallurgy-Forging
+This mod is Open source and free to use under the GNU AGPL 3.0 License v3.0. The mod offers currently the ability to make Tools and Items out of metal including but not limited to nails
+
 
 A Mod For DayZ Standalone Video Game https://store.steampowered.com/app/221100/DayZ/
 
@@ -11,8 +13,9 @@ Mod includes
 - Ability to Harvest Ores from Boulders and Rocks
 - Ability to Smith Metal into tools/nails/wedges and much more coming soon
 - Fully Compabtible with Ammo Making https://github.com/Dumpgrah/Public-Ammo-Making
+- Full Custome Profile Config for Complete Control over the mods tempatures/Smelting times/ and many other aspects
 
-This mod is Open source and free to use under the GNU AGPL 3.0 License v3.0. The mod offers currently the ability to make Tools and Items out of metal including but not limited to nails
+
 
 Source Code Rules
 
