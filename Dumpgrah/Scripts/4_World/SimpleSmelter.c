@@ -20,6 +20,7 @@ class ND_Charcoal extends ItemBase
 	{
 		super.InitItemVariables();
 		can_this_be_combined = true;
+		m_CanThisBeSplit = false;
 	};
 	override bool CanPutAsAttachment( EntityAI parent )
 	{

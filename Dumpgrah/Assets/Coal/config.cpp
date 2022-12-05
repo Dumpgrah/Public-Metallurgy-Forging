@@ -3069,7 +3069,7 @@ class CfgVehicles
 	    isMeleeWeapon=0; 
 		rotationFlags = 17;
 		quantityBar = 0;
-		canBeSplit=1;
+		canBeSplit=0;
 		varQuantityInit=1;
 		varQuantityMin=0;
 		varQuantityMax=1400;
