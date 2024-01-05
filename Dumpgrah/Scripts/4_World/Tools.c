@@ -301,7 +301,7 @@ class ND_ImpureIronHatchetHammer extends Hammer
 		ReplaceEdibleWithNew("ND_ImpureIronHatchet");
 	}
 	
-	void ReplaceEdibleWithNew (string typeName)
+	override void ReplaceEdibleWithNew (string typeName)
 	{
 		PlayerBase player = PlayerBase.Cast(GetHierarchyRootPlayer());
 		if (player)
@@ -351,7 +351,7 @@ modded class ActionBuildPartCB : ActionContinuousBaseCB
 modded class ActionBuildPart: ActionContinuousBase
 {
 
-	protected void SetBuildingAnimation( ItemBase item )
+	protected override void SetBuildingAnimation( ItemBase item )
 	{
 		switch( item.Type() )
 		{
@@ -404,7 +404,7 @@ modded class ActionDismantlePartCB : ActionContinuousBaseCB
 
 modded class ActionDismantlePart: ActionContinuousBase
 {
-	protected void SetBuildingAnimation( ItemBase item )
+	protected override void SetBuildingAnimation( ItemBase item )
 	{
 		switch( item.Type() )
 		{

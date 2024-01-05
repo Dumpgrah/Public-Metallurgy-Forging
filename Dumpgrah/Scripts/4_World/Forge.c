@@ -33,12 +33,12 @@ class ND_ForgewHood extends ND_ForgeBase
 
 		}		
 	};
-	protected void StartHeating()
+	protected override void StartHeating()
 	{		
 		m_HeatingTimer = new Timer ( CALL_CATEGORY_GAMEPLAY );
 		m_HeatingTimer.Run ( 3, this, "Heating", NULL, true );	
 	};
-	protected void StopCooling()
+	protected override void StopCooling()
 	{
 		//Stop cooling
 		m_CoolingTimer.Stop();
@@ -46,7 +46,7 @@ class ND_ForgewHood extends ND_ForgeBase
 
 	
 	};
-	protected void TransferHeatToNearPlayers()
+	protected override void TransferHeatToNearPlayers()
 	{
 		float distance;
 

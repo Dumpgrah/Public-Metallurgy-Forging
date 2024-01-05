@@ -233,7 +233,7 @@ class ND_CrucibleMoltenCopper extends ND_MoltenCrucible
 		StartCooling();
 	};
 	
-	protected void StartCooling()
+	protected override void StartCooling()
 	{
 		m_CoolingTimer = new Timer( CALL_CATEGORY_GAMEPLAY );
 		m_CoolingTimer.Run( 1, this, "Cooling", NULL, true );		// true param loops
@@ -305,7 +305,7 @@ class ND_CrucibleMoltenZinc extends ND_MoltenCrucible
 		StartCooling();
 	};
 	
-	protected void StartCooling()
+	protected override void StartCooling()
 	{
 
 		
@@ -415,7 +415,7 @@ class ND_CrucibleMoltenImpureIron extends ND_MoltenCrucible
 		StartCooling();
 	};
 	
-	protected void StartCooling()
+	protected override void StartCooling()
 	{
 
 		
@@ -512,7 +512,7 @@ class ND_CrucibleMoltenPigIron extends ND_MoltenCrucible
 		StartCooling();
 	};
 	
-	protected void StartCooling()
+	protected override void StartCooling()
 	{
 
 		
@@ -641,16 +641,6 @@ class ND_ClayCrucibleMoltenBrass extends CrucibleMoltenBrass
       RegisterNetSyncVariableInt("m_CastRifleCasing");
 	  RegisterNetSyncVariableInt("m_CastPistolCasing");
     };
-	bool HotEnough()
-	{
-		
-		if(GetTemperature() > TempaturetoCast)
-		{
-			return true;
-		}
-		return false;
-		
-	}
 	override string GetRifleTendancyText()
 	{
 		if (m_CastRifleCasing == 0)
